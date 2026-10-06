@@ -1,0 +1,4 @@
+import { useEffect,useState } from 'react';
+import { motion } from 'framer-motion';
+import Layout from '../components/Layout'; import api from '../services/api';
+export default function Achievements(){const [items,setItems]=useState(null);useEffect(()=>{api.get('/achievements').then(r=>setItems(r.data.achievements))},[]);if(!items)return <Layout><div className="screen-center">Loading achievements…</div></Layout>;return <Layout><div className="page-head"><p className="eyebrow">PROVE IT</p><h1>Achievements 🏆</h1><p className="muted">Small wins become a different version of you.</p></div><div className="achievement-grid">{items.map(a=><motion.div key={a.id} whileHover={{y:-4}} className={`achievement card ${a.unlocked?'unlocked':'locked'}`}><div className="achievement-icon">{a.unlocked?a.icon:'🔒'}</div><div><h2>{a.title}</h2><p>{a.description}</p><small>{a.unlocked?'UNLOCKED':'LOCKED'}</small></div></motion.div>)}</div></Layout>}

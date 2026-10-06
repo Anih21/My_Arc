@@ -1,0 +1,2 @@
+import mongoose from 'mongoose';
+const dailyTaskSchema=new mongoose.Schema({userId:{type:mongoose.Schema.Types.ObjectId,ref:'User',required:true,index:true},taskId:{type:mongoose.Schema.Types.ObjectId,ref:'Task'},date:{type:String,required:true,index:true},title:{type:String,required:true},completed:{type:Boolean,default:false},completedAt:Date}); dailyTaskSchema.index({userId:1,date:1,taskId:1},{unique:true}); export default mongoose.model('DailyTask',dailyTaskSchema);
